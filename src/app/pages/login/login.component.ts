@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import {NgOptimizedImage} from '@angular/common';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 
 @Component({
   selector: 'app-login',
   imports: [
+    CommonModule,
     NgOptimizedImage
   ],
   templateUrl: './login.component.html',
