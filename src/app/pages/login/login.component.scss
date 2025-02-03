@@ -206,11 +206,12 @@
 .input-group {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 15px;
+  margin-top: 2ex;
 }
 
 .input-group label {
-  font-size: 14px;
+  font-size: 20px;
   font-weight: 600;
   color: #828282;
 }
@@ -220,15 +221,29 @@
   padding: 13px 10px;
   border: 1px solid #ded2d9;
   border-radius: 5px;
-  font-size: 14px;
-  color: #e0e0e0;
+  font-size: 16px;
+  color: #4d7a3a;
+}
+
+.input-group input::placeholder {
+  color:#a1a1a1;
+}
+
+.input-group input:hover {
+  border-color: #860752;
+}
+
+.input-group input:active {
+  border: none;
 }
 
 .options {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 12px;
+  font-size: 16px;
+  margin-top: 4ex;
+  margin-bottom: 4ex;
 }
 
 .remember-me {
@@ -279,8 +294,6 @@
   position: absolute;
 }
 .left-img {
-  width: 217px;
-  height: 239px;
   left: 6px;
   top: 51px;
 }
@@ -291,8 +304,6 @@
   top: 294px;
 }
 .right-img {
-  width: 218px;
-  height: 239px;
   left: 685px;
   top: 733px;
 }
