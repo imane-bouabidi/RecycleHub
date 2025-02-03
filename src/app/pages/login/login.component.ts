@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import {CommonModule, NgOptimizedImage} from '@angular/common';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-login',
   imports: [
     CommonModule,
-    NgOptimizedImage
+    NgOptimizedImage,
+    RouterLink
   ],
   templateUrl: './login.component.html',
   standalone: true,

@@ -1,1 +1,86 @@
-<p>signup works!</p>
+<div class="page-container">
+  <div class="decorative-panel">
+    <div class="bg-panel"></div>
+    <div class="semi-transparent-box"></div>
+    <div class="small-gradient-box"></div>
+    <div class="abstract-shapes">
+      <div class="shape white-rect shape1"></div>
+      <div class="shape white-rect shape2"></div>
+      <div class="shape gradient-rect shape3"></div>
+      <div class="dot dot1"></div>
+      <div class="dot dot2"></div>
+      <div class="dot dot3"></div>
+    </div>
+    <div class="logo-text">ZERO WASTE MATTERS</div>
+  </div>
+
+  <div class="menu-icon">
+    <div class="menu-square top-left"></div>
+    <div class="menu-square top-right"></div>
+    <div class="menu-square bottom-left"></div>
+    <div class="menu-square bottom-right"></div>
+    <div class="menu-bar horizontal"></div>
+    <div class="menu-bar vertical"></div>
+    <div class="menu-bar vertical top"></div>
+  </div>
+
+  <div class="login-form-container"></div>
+
+  <div class="login-section">
+    <div class="login-form">
+      <h2>Create your Account</h2>
+      <form class="form">
+        <div class="input-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" placeholder="full name" required />
+        </div>
+        <div class="input-group">
+          <label for="adress">Adress</label>
+          <input type="text" id="adress" placeholder="adress" required />
+        </div>
+        <div class="input-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" placeholder="0655555555" required />
+        </div>
+        <div class="input-group">
+          <label for="date">Birthdate</label>
+          <input type="date" id="date" required />
+        </div>
+        <div class="input-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="mail@abc.com" required />
+        </div>
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            placeholder="*****************"
+            required
+          />
+        </div>
+        <button type="submit" class="btn-login">Create</button>
+      </form>
+      <div class="register-prompt">
+        <span>Already registred?</span>
+        <a [routerLink]="['/login']">Login</a>
+      </div>
+    </div>
+  </div>
+
+  <img
+    class="decorative-img left-img"
+    ngSrc="images/world.png"
+    alt="Décoration gauche" width="217" height="209"
+  />
+  <img
+    class="decorative-img center-img"
+    ngSrc="images/logo.png"
+    alt="Décoration centre" height="412" width="512"
+  />
+  <img
+    class="decorative-img right-img"
+    ngSrc="images/world.png"
+    width="217" height="209"
+  />
+</div>
