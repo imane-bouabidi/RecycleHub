@@ -7,7 +7,6 @@ import {User} from '../../models/user.model';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'https://api.recyclehub.com/auth';
 
   constructor(private http: HttpClient) {}
 
@@ -16,11 +15,21 @@ export class AuthService {
       id: '1',
       fullName: 'John',
       address: '123 Main St',
-      phone: '123-456-7890',
+      phone: '1234567890',
       email: email,
-      password: "jznodke",
+      password: password,
       birthdate: new Date('1990-01-01'),
     };
+    return of(mockUser);
+  }
+
+  signup(userData: Omit<User, 'id'>): Observable<User> {
+    const mockUser: User = {
+      id: '2',
+      ...userData,
+      birthdate: new Date(userData.birthdate),
+    };
+    console.log('AuthService: Mock user created:', mockUser);
     return of(mockUser);
   }
 }

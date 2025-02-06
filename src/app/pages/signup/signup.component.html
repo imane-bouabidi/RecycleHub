@@ -24,45 +24,110 @@
     <div class="menu-bar vertical top"></div>
   </div>
 
-  <div class="login-form-container"></div>
-
   <div class="login-section">
     <div class="login-form">
       <h2>Create your Account</h2>
-      <form class="form">
+      <form class="form" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+        <!-- Full Name -->
         <div class="input-group">
           <label for="name">Full Name</label>
-          <input type="text" id="name" placeholder="full name" required />
+          <input
+            type="text"
+            id="name"
+            formControlName="fullName"
+            placeholder="Full name"
+            required
+          >
+          <small *ngIf="signupForm.get('fullName')?.invalid && signupForm.get('fullName')?.touched">
+            Full name is required
+          </small>
         </div>
+
+        <!-- Address -->
         <div class="input-group">
-          <label for="adress">Adress</label>
-          <input type="text" id="adress" placeholder="adress" required />
+          <label for="address">Address</label>
+          <input
+            type="text"
+            id="address"
+            formControlName="address"
+            placeholder="Address"
+            required
+          >
+          <small *ngIf="signupForm.get('address')?.invalid && signupForm.get('address')?.touched">
+            Address is required
+          </small>
         </div>
+
+        <!-- Phone Number -->
         <div class="input-group">
           <label for="phone">Phone Number</label>
-          <input type="tel" id="phone" placeholder="0655555555" required />
+          <input
+            type="tel"
+            id="phone"
+            formControlName="phone"
+            placeholder="0655555555"
+            required
+          >
+          <small *ngIf="signupForm.get('phone')?.invalid && signupForm.get('phone')?.touched">
+            10-digit phone number required
+          </small>
         </div>
+
+        <!-- Birthdate -->
         <div class="input-group">
           <label for="date">Birthdate</label>
-          <input type="date" id="date" required />
+          <input
+            type="date"
+            id="date"
+            formControlName="birthdate"
+            required
+          >
+          <small *ngIf="signupForm.get('birthdate')?.invalid && signupForm.get('birthdate')?.touched">
+            Birthdate is required
+          </small>
         </div>
+
+        <!-- Email -->
         <div class="input-group">
           <label for="email">Email</label>
-          <input type="email" id="email" placeholder="mail@abc.com" required />
+          <input
+            type="email"
+            id="email"
+            formControlName="email"
+            placeholder="mail@abc.com"
+            required
+          >
+          <small *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched">
+            Valid email required
+          </small>
         </div>
+
+        <!-- Password -->
         <div class="input-group">
           <label for="password">Password</label>
           <input
             type="password"
             id="password"
+            formControlName="password"
             placeholder="*****************"
             required
-          />
+          >
+          <small *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched">
+            Minimum 6 characters required
+          </small>
         </div>
-        <button type="submit" class="btn-login">Create</button>
+
+        <button
+          type="submit"
+          class="btn-login"
+          [disabled]="signupForm.invalid"
+        >
+          Sign Up
+        </button>
       </form>
+
       <div class="register-prompt">
-        <span>Already registred?</span>
+        <span>Already registered?</span>
         <a [routerLink]="['/login']">Login</a>
       </div>
     </div>

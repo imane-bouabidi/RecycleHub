@@ -17,3 +17,18 @@ export const loginFailure = createAction(
 );
 
 export const logout = createAction('[Auth] Logout');
+
+export const signup = createAction(
+  '[Auth] Signup',
+  props<{ user: Omit<User, 'id'> }>()
+);
+
+export const signupSuccess = createAction(
+  '[Auth] Signup Success',
+  props<{ user: User }>()
+);
+
+export const signupFailure = createAction(
+  '[Auth] Signup Failure',
+  props<{ error: string }>()
+);

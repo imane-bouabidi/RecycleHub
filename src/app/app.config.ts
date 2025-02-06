@@ -8,16 +8,16 @@ import {appReducers} from './store/app.reducer';
 import {provideStore} from '@ngrx/store';
 import {provideEffects} from '@ngrx/effects';
 import {AuthEffects} from './store/auth/auth.effects';
-import {CollectEffects} from './store/collect/collect.effects';
+import {provideStoreDevtools} from '@ngrx/store-devtools';
 
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideHttpClient(),
     importProvidersFrom(ReactiveFormsModule),
     provideStore(appReducers),
-    provideEffects([AuthEffects, CollectEffects]),
+    provideEffects([AuthEffects]),
+    provideStoreDevtools({ maxAge: 25 })
   ]
 };
