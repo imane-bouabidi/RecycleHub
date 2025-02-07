@@ -46,7 +46,7 @@ export class AuthEffects {
           const newUser = this.authService.registerUser(userData);
           this.authService.setUser(newUser);
           return of(signupSuccess({ user: newUser })).pipe(
-            tap(() => this.router.navigate(['/dashboard']))
+            tap(() => this.router.navigate(['/login']))
           );
         } catch (error) {
           return of(signupFailure({ error: "Erreur lors de l'inscription" }));
