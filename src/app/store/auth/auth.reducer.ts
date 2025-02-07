@@ -1,10 +1,13 @@
 import { createReducer, on } from '@ngrx/store';
-import {loginSuccess, logout, signupFailure, signupSuccess} from './auth.actions';
+import { loginSuccess, signupSuccess, logout, signupFailure } from './auth.actions';
 import { AuthState } from '../app.state';
+import { AuthService } from '../../services/auth/auth.service';
+
+const authService = new AuthService();
 
 export const initialState: AuthState = {
-  user: null,
-  isLoggedIn: false
+  user: authService.getCurrentUser(),
+  isLoggedIn: !!authService.getCurrentUser(),
 };
 
 export const authReducer = createReducer(
@@ -12,30 +15,23 @@ export const authReducer = createReducer(
   on(loginSuccess, (state, { user }) => ({
     ...state,
     user,
-    isLoggedIn: true
+    isLoggedIn: true,
+    error: null
+  })),
+  on(signupSuccess, (state, { user }) => ({
+    ...state,
+    user,
+    isLoggedIn: true,
+    error: null
   })),
   on(logout, (state) => ({
     ...state,
     user: null,
-    isLoggedIn: false
+    isLoggedIn: false,
+    error: null
   })),
-
-  on(signupSuccess, (state, { user }) => {
-    console.log('Reducer: Signup success, updating state with user:', user);
-    return {
-      ...state,
-      user,
-      isLoggedIn: true,
-      error: null
-    };
-  }),
-  on(signupFailure, (state, { error }) => {
-    console.error('Reducer: Signup failed, updating state with error:', error);
-    return {
-      ...state,
-      error
-    };
-  })
+  on(signupFailure, (state, { error }) => ({
+    ...state,
+    error
+  }))
 );
-
-
