@@ -1,10 +1,13 @@
 import { createReducer, on } from '@ngrx/store';
-import { CollectState } from '../app.state';
-import {loadRequestsSuccess, selectRequest} from './collect.actions';
+import { loadRequestsSuccess, addRequest, updateRequest, deleteRequest } from './collect.actions';
+import { CollectRequest } from '../../models/collect-request.model';
+
+export interface CollectState {
+  requests: CollectRequest[];
+}
 
 export const initialState: CollectState = {
-  requests: [],
-  selectedRequest: null
+  requests: []
 };
 
 export const collectReducer = createReducer(
@@ -13,8 +16,18 @@ export const collectReducer = createReducer(
     ...state,
     requests
   })),
-  on(selectRequest, (state, { requestId }) => ({
+  on(addRequest, (state, { request }) => ({
     ...state,
-    selectedRequest: state.requests.find((r) => r.id === requestId) || null
+    requests: [...state.requests, request]
+  })),
+  on(updateRequest, (state, { requestId, updates }) => ({
+    ...state,
+    requests: state.requests.map(req =>
+      req.id === requestId ? { ...req, ...updates } : req
+    )
+  })),
+  on(deleteRequest, (state, { requestId }) => ({
+    ...state,
+    requests: state.requests.filter(req => req.id !== requestId)
   }))
 );
