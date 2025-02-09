@@ -17,7 +17,7 @@ const collectors: User[] = [
     id: 'collector2',
     fullName: 'Collector Two',
     address: '456 , Casa',
-    "city": "Casa",
+    "city": "casa",
     phone: '2222222222',
     email: 'collector2@example.com',
     password: 'password2',

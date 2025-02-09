@@ -2,6 +2,7 @@
   <p>Type de déchet: {{ request.wasteType }}</p>
   <p>Poids estimé: {{ request.estimatedWeight }}g</p>
   <p>Adresse: {{ request.address }}</p>
+  <p>City: {{ request.city }}</p>
   <p>Date: {{ request.scheduledDate | date }}</p>
   <p>Statut: {{ request.status }}</p>
   <button (click)="deleteRequest(request.id)" *ngIf="request.status === 'en attente'">Supprimer</button>
