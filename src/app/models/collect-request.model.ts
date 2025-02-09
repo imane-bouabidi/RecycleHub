@@ -5,6 +5,7 @@ export interface CollectRequest {
   photos?: string[];
   estimatedWeight: number;
   address: string;
+  city: string;
   scheduledDate: Date;
   timeSlot: string;
   notes?: string;

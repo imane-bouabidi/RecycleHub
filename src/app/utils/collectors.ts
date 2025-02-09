@@ -6,7 +6,8 @@ const collectors: User[] = [
   {
     id: 'collector1',
     fullName: 'Collector One',
-    address: '123 Collector St',
+    address: '123 St, Safi',
+    "city": "Safi",
     phone: '1111111111',
     email: 'collector1@example.com',
     password: 'password1',
@@ -15,7 +16,8 @@ const collectors: User[] = [
   {
     id: 'collector2',
     fullName: 'Collector Two',
-    address: '456 Collector St',
+    address: '456 , Casa',
+    "city": "Casa",
     phone: '2222222222',
     email: 'collector2@example.com',
     password: 'password2',

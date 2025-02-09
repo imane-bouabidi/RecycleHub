@@ -5,13 +5,17 @@ import {AppState} from '../../store/app.state';
 import {User} from '../../models/user.model';
 import {Observable} from 'rxjs';
 import {AsyncPipe, DatePipe, NgIf} from '@angular/common';
+import {PointsConversionComponent} from '../points-conversion/points-conversion.component';
+import {PointsComponent} from '../points/points.component';
 
 @Component({
   selector: 'app-dashboard',
   imports: [
     AsyncPipe,
     DatePipe,
-    NgIf
+    NgIf,
+    PointsConversionComponent,
+    PointsComponent
   ],
   templateUrl: './dashboard.component.html',
   standalone: true,
@@ -20,6 +24,7 @@ import {AsyncPipe, DatePipe, NgIf} from '@angular/common';
 export class DashboardComponent {
 
   user$: Observable<User | null>;
+  currentUserId = 'currentUserId';
 
   constructor(private store: Store<AppState>) {
     this.user$ = this.store.select(state => state.auth.user);

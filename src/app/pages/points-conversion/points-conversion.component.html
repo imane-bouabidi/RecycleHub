@@ -1,0 +1,9 @@
+<div>
+  <select [(ngModel)]="selectedPoints">
+    <option value="100">100 points = 50 Dh</option>
+    <option value="200">200 points = 120 Dh</option>
+    <option value="500">500 points = 350 Dh</option>
+  </select>
+  <button (click)="convertPoints()">Convertir</button>
+  <p *ngIf="message">{{ message }}</p>
+</div>

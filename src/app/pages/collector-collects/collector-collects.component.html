@@ -4,5 +4,6 @@
   <p>Adresse: {{ request.address }}</p>
   <p>Date: {{ request.scheduledDate | date }}</p>
   <p>Statut: {{ request.status }}</p>
-  <button (click)="deleteRequest(request.id)" *ngIf="request.status === 'en attente'">Supprimer</button>
+  <button (click)="acceptRequest(request.id)">Accepter</button>
+  <button (click)="rejectRequest(request.id)">Rejeter</button>
 </div>

@@ -7,6 +7,7 @@ import {CollectRequestComponent} from './pages/collect-request/collect-request.c
 import {RequestTrackingComponent} from './pages/request-tracking/request-tracking.component';
 import {ProfileComponent} from './pages/profile/profile.component';
 import {CollectorComponent} from './pages/collector/collector.component';
+import {CollectorCollectsComponent} from './pages/collector-collects/collector-collects.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -17,6 +18,7 @@ export const routes: Routes = [
   { path: 'request-tracking', component: RequestTrackingComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'collector', component: CollectorComponent },
+  { path: 'collector-collects', component: CollectorCollectsComponent },
   { path: 'points', component: PointsComponent },
   { path: '**', redirectTo: '/login' }
 ];
