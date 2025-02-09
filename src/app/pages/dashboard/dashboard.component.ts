@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {Store} from '@ngrx/store';
 import {loadRequests} from '../../store/collect/collect.actions';
 import {AppState} from '../../store/app.state';
-import {User} from '../../models/user.model';
+import {User} from '../../models/User.model';
 import {Observable} from 'rxjs';
 import {AsyncPipe, DatePipe, NgIf} from '@angular/common';
 import {PointsConversionComponent} from '../points-conversion/points-conversion.component';

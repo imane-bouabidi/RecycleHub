@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {PointsService} from '../../services/points/points.service';
 import {AuthService} from '../../services/auth/auth.service';
-import {User} from '../../models/user.model';
+import {User} from '../../models/User.model';
 
 @Component({
   selector: 'app-points',

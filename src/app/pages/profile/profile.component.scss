@@ -1,0 +1,67 @@
+.profile-container {
+  max-width: 600px;
+  margin: 2em auto;
+  padding: 1em;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  h2 {
+    text-align: center;
+    margin-bottom: 1em;
+  }
+
+  .form-group {
+    margin-bottom: 1em;
+
+    label {
+      display: block;
+      margin-bottom: 0.5em;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.5em;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    small {
+      color: red;
+      font-size: 0.8em;
+    }
+  }
+
+  button {
+    display: block;
+    width: 100%;
+    padding: 0.5em;
+    background: #4d7a3a;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.delete-button {
+  display: block;
+  width: 100%;
+  padding: 0.5em;
+  margin-top: 1em;
+  background: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background: #ff1a1a;
+  }
+}

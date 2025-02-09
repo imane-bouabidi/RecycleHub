@@ -21,6 +21,13 @@ export class CollectService {
     localStorage.setItem(this.REQUESTS_KEY, JSON.stringify(requests));
   }
 
+  canAddRequest(userId: string): boolean {
+    const requests = this.getRequestsByUser(userId)
+      .filter(req => ['en attente', 'occupée', 'en cours'].includes(req.status));
+    const totalWeight = requests.reduce((sum, req) => sum + req.estimatedWeight, 0);
+    return requests.length < 3 && totalWeight < 10000;
+  }
+
   updateRequest(requestId: string, updates: Partial<CollectRequest>): void {
     const requests = this.getRequests();
     const index = requests.findIndex(req => req.id === requestId);

@@ -1,4 +1,5 @@
-import { User } from '../models/user.model';
+// @ts-ignore
+import {User} from '../models/User.model';
 
 const COLLECTORS_KEY = 'recyclehub_collectors';
 
@@ -11,7 +12,8 @@ const collectors: User[] = [
     phone: '1111111111',
     email: 'collector1@example.com',
     password: 'password1',
-    birthdate: new Date('1980-01-01')
+    birthdate: new Date('1980-01-01'),
+    role:'collector'
   },
   {
     id: 'collector2',
@@ -21,7 +23,8 @@ const collectors: User[] = [
     phone: '2222222222',
     email: 'collector2@example.com',
     password: 'password2',
-    birthdate: new Date('1985-01-01')
+    birthdate: new Date('1985-01-01'),
+    role:'collector'
   }
 ];
 

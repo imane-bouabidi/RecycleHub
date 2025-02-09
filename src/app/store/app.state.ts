@@ -1,4 +1,4 @@
-import {User} from '../models/user.model';
+import {User} from '../models/User.model';
 import {CollectRequest} from '../models/collect-request.model';
 
 export interface AppState {

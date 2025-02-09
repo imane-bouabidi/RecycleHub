@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User } from '../../models/user.model';
+import { User } from '../../models/User.model';
 
 @Injectable({
   providedIn: 'root'
@@ -53,5 +53,38 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem(this.CURRENT_USER_KEY);
+  }
+
+  updateUserInStorage(updatedUser: User): void {
+    const users = this.getUsers();
+    const userIndex = users.findIndex(u => u.id === updatedUser.id);
+
+    if (userIndex !== -1) {
+      users[userIndex] = updatedUser;
+      localStorage.setItem(this.USERS_KEY, JSON.stringify(users));
+    } else {
+      const collectors = this.getCollectors();
+      const collectorIndex = collectors.findIndex(c => c.id === updatedUser.id);
+
+      if (collectorIndex !== -1) {
+        collectors[collectorIndex] = updatedUser;
+        localStorage.setItem(this.COLLECTORS_KEY, JSON.stringify(collectors));
+      }
+    }
+  }
+
+  deleteUserFromStorage(userId: string): void {
+    const users = this.getUsers();
+    const updatedUsers = users.filter(u => u.id !== userId);
+    localStorage.setItem(this.USERS_KEY, JSON.stringify(updatedUsers));
+
+    const collectors = this.getCollectors();
+    const updatedCollectors = collectors.filter(c => c.id !== userId);
+    localStorage.setItem(this.COLLECTORS_KEY, JSON.stringify(updatedCollectors));
+  }
+
+  getCollectors(): User[] {
+    const collectorsJson = localStorage.getItem(this.COLLECTORS_KEY);
+    return collectorsJson ? JSON.parse(collectorsJson) : [];
   }
 }

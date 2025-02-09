@@ -22,7 +22,7 @@ export class CollectRequestComponent {
     private router: Router
   ) {
     this.collectForm = this.fb.group({
-      wasteType: ['', Validators.required],
+      wasteType: [[], Validators.required],
       estimatedWeight: ['', [Validators.required, Validators.min(1000)]],
       address: ['', Validators.required],
       city: ['', Validators.required],
@@ -33,7 +33,7 @@ export class CollectRequestComponent {
   }
 
   onSubmit() {
-    if (this.collectForm.valid) {
+    if (this.collectForm.valid && this.collectService.canAddRequest('currentUserId')) {
       const request: CollectRequest = {
         id: this.generateId(),
         userId: 'currentUserId',
@@ -42,6 +42,8 @@ export class CollectRequestComponent {
       };
       this.collectService.addRequest(request);
       this.router.navigate(['/dashboard']);
+    } else {
+      alert('Vous avez atteint la limite de demandes ou de poids.');
     }
   }
 

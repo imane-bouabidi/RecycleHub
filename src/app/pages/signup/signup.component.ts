@@ -4,7 +4,7 @@ import { RouterLink } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { signup } from '../../store/auth/auth.actions';
-import { User } from '../../models/user.model';
+import { User } from '../../models/User.model';
 
 @Component({
   selector: 'app-signup',
@@ -43,7 +43,8 @@ export class SignupComponent {
         phone: formValue.phone!,
         email: formValue.email!,
         password: formValue.password!,
-        birthdate: new Date(formValue.birthdate!)
+        birthdate: new Date(formValue.birthdate!),
+        role: 'particular'
       };
       console.log('Dispatching signup action with user:', user);
       this.store.dispatch(signup({ user }));
