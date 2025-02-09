@@ -1,7 +1,8 @@
 <div *ngFor="let request of requests">
-  <p>Type de déchet: {{ request.wasteType }}</p>
+  <p>Type de déchet: {{ request.wasteTypes }}</p>
   <p>Poids estimé: {{ request.estimatedWeight }}g</p>
   <p>Adresse: {{ request.address }}</p>
+  <p>City: {{ request.city }}</p>
   <p>Date: {{ request.scheduledDate | date }}</p>
   <p>Statut: {{ request.status }}</p>
   <button (click)="acceptRequest(request.id)">Accepter</button>

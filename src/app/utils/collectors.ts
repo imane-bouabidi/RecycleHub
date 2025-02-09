@@ -25,6 +25,16 @@ const collectors: User[] = [
     password: 'password2',
     birthdate: new Date('1985-01-01'),
     role:'collector'
+  },
+  {id: 'collector3',
+    fullName: 'Collector Two',
+    address: '456 , Casa',
+    "city": "agadir",
+    phone: '2222222222',
+    email: 'collector3@example.com',
+    password: 'password3',
+    birthdate: new Date('1985-01-01'),
+    role:'collector'
   }
 ];
 

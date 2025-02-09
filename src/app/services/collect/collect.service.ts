@@ -15,6 +15,10 @@ export class CollectService {
     return this.getRequests().filter(req => req.userId === userId);
   }
 
+  getRequestById(id: string): CollectRequest | undefined {
+    return this.getRequests().find(r => r.id === id);
+  }
+
   addRequest(request: CollectRequest): void {
     const requests = this.getRequests();
     requests.push(request);
@@ -22,10 +26,12 @@ export class CollectService {
   }
 
   canAddRequest(userId: string): boolean {
-    const requests = this.getRequestsByUser(userId)
-      .filter(req => ['en attente', 'occupée', 'en cours'].includes(req.status));
+    const requests = this.getRequestsByUser(userId).filter(req =>
+      ['en attente', 'occupée', 'en cours'].includes(req.status)
+    );
+    if (requests.length >= 3) return false;
     const totalWeight = requests.reduce((sum, req) => sum + req.estimatedWeight, 0);
-    return requests.length < 3 && totalWeight < 10000;
+    return totalWeight < 10000;
   }
 
   updateRequest(requestId: string, updates: Partial<CollectRequest>): void {
@@ -40,6 +46,19 @@ export class CollectService {
   deleteRequest(requestId: string): void {
     const requests = this.getRequests().filter(req => req.id !== requestId);
     localStorage.setItem(this.REQUESTS_KEY, JSON.stringify(requests));
+  }
+
+  addRequestWithValidation(request: CollectRequest): boolean {
+    if (this.canAddRequest(request.userId)) {
+      this.addRequest(request);
+      return true;
+    }
+    return false;
+  }
+
+  canModifyRequest(requestId: string): boolean {
+    const request = this.getRequests().find(req => req.id === requestId);
+    return request?.status === 'en attente';
   }
 
   validateRequest(requestId: string, realWeight: number, wasteType: string): void {

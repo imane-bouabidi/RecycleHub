@@ -23,5 +23,10 @@ export const routes: Routes = [
   { path: 'collector', component: CollectorComponent, canActivate: [AuthGuard, CollectorGuard] },
   { path: 'collector-collects', component: CollectorCollectsComponent, canActivate: [AuthGuard] },
   { path: 'points', component: PointsComponent, canActivate: [AuthGuard, CollectorGuard] },
+  {
+    path: 'collect-request/:id',
+    component: CollectRequestComponent,
+    canActivate: [AuthGuard]
+  },
   { path: '**', redirectTo: '/login' }
 ];

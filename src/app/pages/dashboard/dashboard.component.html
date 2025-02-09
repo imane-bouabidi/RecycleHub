@@ -1,22 +1,104 @@
 <div class="dashboard-container">
-  <h1>Welcome to Your Dashboard</h1>
+  <div *ngIf="user$ | async as user">
+    <!-- dashboard.component.html -->
+    <div *ngIf="!isCollector">
+      <h2>Your Collection Requests</h2>
+      <div *ngIf="userRequests.length > 0; else noRequests">
+        <table class="requests-table">
+          <thead>
+          <tr>
+            <th>Types</th>
+            <th>Weight</th>
+            <th>Location</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let request of userRequests">
+            <td>{{ (request.wasteTypes || []).join(', ') }}</td>
+            <td>{{ request.estimatedWeight }}g</td>
+            <td>{{ request.address }}, {{ request.city }}</td>
+            <td>{{ request.scheduledDate | date }}</td>
+            <td>
+            <span class="status" [attr.status]="request.status">
+              {{ request.status }}
+            </span>
+            </td>
+            <td>
+              <div class="button-group">
+                <button
+                  *ngIf="request.status === 'en attente'"
+                  class="btn btn-edit"
+                  (click)="editRequest(request.id)"
+                >
+                  Edit
+                </button>
+                <button
+                  *ngIf="request.status === 'en attente'"
+                  class="btn btn-delete"
+                  (click)="deleteRequest(request.id)"
+                >
+                  Delete
+                </button>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
 
-  <div *ngIf="user$ | async as user; else loading">
-    <div class="user-info">
-      <h2>User Information</h2>
-      <p><strong>Full Name:</strong> {{ user.fullName }}</p>
-      <p><strong>Email:</strong> {{ user.email }}</p>
-      <p><strong>Address:</strong> {{ user.address }}</p>
-      <p><strong>Phone:</strong> {{ user.phone }}</p>
-      <p><strong>Birthdate:</strong> {{ user.birthdate | date }}</p>
+    <div *ngIf="isCollector">
+      <h2>Available Requests</h2>
+      <div *ngIf="userRequests.length > 0; else noRequests">
+        <table class="requests-table">
+          <thead>
+          <tr>
+            <th>Types</th>
+            <th>Weight</th>
+            <th>Location</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let request of requests">
+            <td>{{ (request.wasteTypes|| []).join(', ') }}</td>
+            <td>{{ request.estimatedWeight }}g</td>
+            <td>{{ request.address }}, {{ request.city }}</td>
+            <td>{{ request.scheduledDate | date }}</td>
+            <td>
+                <span class="status" [attr.status]="request.status">
+                  {{ request.status }}
+                </span>
+            </td>
+            <td>
+              <div class="button-group">
+                <button class="btn btn-accept" (click)="acceptRequest(request.id)">
+                  Accept
+                </button>
+                <button class="btn btn-reject" (click)="rejectRequest(request.id)">
+                  Reject
+                </button>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 
-  <ng-template #loading>
-    <p>Loading user information...</p>
+  <ng-template #noRequests>
+    <div class="no-requests">
+      No requests found
+    </div>
   </ng-template>
 
-  <app-points></app-points>
-  <app-points-conversion></app-points-conversion>
+<!--  <button class="btn btn-load">-->
+<!--    Refresh Requests-->
+<!--  </button>-->
 </div>
-<button (click)="onLoadRequests()">Load Requests</button>

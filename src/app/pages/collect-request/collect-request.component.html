@@ -1,17 +1,28 @@
+<h2>{{ isEditMode ? 'Modifier la demande' : 'Nouvelle demande' }}</h2>
 <form [formGroup]="collectForm" (ngSubmit)="onSubmit()">
-  <div>
-    <label for="wasteType">Type de déchet</label>
-    <select id="wasteType" formControlName="wasteType">
+  <div class="form-group">
+    <label>Types de déchets</label>
+    <select
+      formControlName="wasteTypes"
+      multiple
+      class="form-control"
+    >
       <option value="plastique">Plastique</option>
       <option value="verre">Verre</option>
       <option value="papier">Papier</option>
-      <option value="métal">Métal</option>
+      <option value="metal">Métal</option>
     </select>
+    <small *ngIf="collectForm.get('wasteTypes')?.invalid && collectForm.get('wasteTypes')?.touched">
+      Sélectionnez au moins un type de déchet.
+    </small>
   </div>
 
-  <div>
-    <label for="estimatedWeight">Poids estimé (en grammes)</label>
-    <input type="number" id="estimatedWeight" formControlName="estimatedWeight">
+  <div class="form-group">
+    <label>Poids estimé (en grammes)</label>
+    <input type="number" formControlName="estimatedWeight" />
+    <small *ngIf="collectForm.get('estimatedWeight')?.invalid && collectForm.get('estimatedWeight')?.touched">
+      Le poids doit être d'au moins 1000g.
+    </small>
   </div>
 
   <div>
@@ -39,5 +50,10 @@
     <textarea id="notes" formControlName="notes"></textarea>
   </div>
 
-  <button type="submit" [disabled]="collectForm.invalid">Soumettre</button>
-</form>
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <button type="submit">
+    {{ isEditMode ? 'Mettre à jour' : 'Soumettre' }}
+  </button></form>
