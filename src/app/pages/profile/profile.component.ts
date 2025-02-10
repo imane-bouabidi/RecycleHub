@@ -1,4 +1,3 @@
-// src/app/pages/profile/profile.component.ts
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import { AuthService } from '../../services/auth/auth.service';

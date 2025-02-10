@@ -16,6 +16,8 @@ import {DatePipe, NgForOf} from '@angular/common';
 })
 export class CollectorCollectsComponent {
   requests: CollectRequest[] = [];
+  pendingRequests: CollectRequest[] = [];
+  acceptedRequests: CollectRequest[] = [];
 
   constructor(
     private collectService: CollectService,
@@ -25,21 +27,28 @@ export class CollectorCollectsComponent {
   ngOnInit() {
     const currentUser = this.authService.getCurrentUser();
     if (currentUser) {
-      this.requests = this.collectService.getRequests().filter(req =>
+      this.pendingRequests = this.collectService.getRequests().filter(req =>
         req.status === 'en attente' && req.city === currentUser.city
       );
+
+      this.acceptedRequests = this.collectService.getRequests().filter(req =>
+        req.status === 'occupée' && req.city === currentUser.city
+      );
     }
-    console.log('Demandes filtrées :', this.requests);
+    console.log('Demandes filtrées :', this.pendingRequests);
   }
 
   acceptRequest(requestId: string): void {
     this.collectService.updateRequest(requestId, { status: 'occupée' });
-    this.requests = this.requests.filter(req => req.id !== requestId);
+    this.pendingRequests = this.pendingRequests.filter(req => req.id !== requestId);
+    this.acceptedRequests = this.collectService.getRequests().filter(req =>
+      req.status === 'occupée' && req.city === this.authService.getCurrentUser()?.city
+    );
   }
 
   rejectRequest(requestId: string): void {
     this.collectService.updateRequest(requestId, { status: 'rejetée' });
-    this.requests = this.requests.filter(req => req.id !== requestId);
+    this.pendingRequests = this.pendingRequests.filter(req => req.id !== requestId);
   }
 
 }

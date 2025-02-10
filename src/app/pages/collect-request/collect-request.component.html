@@ -1,59 +1,79 @@
-<h2>{{ isEditMode ? 'Modifier la demande' : 'Nouvelle demande' }}</h2>
-<form [formGroup]="collectForm" (ngSubmit)="onSubmit()">
-  <div class="form-group">
-    <label>Types de déchets</label>
-    <select
-      formControlName="wasteTypes"
-      multiple
-      class="form-control"
-    >
-      <option value="plastique">Plastique</option>
-      <option value="verre">Verre</option>
-      <option value="papier">Papier</option>
-      <option value="metal">Métal</option>
-    </select>
-    <small *ngIf="collectForm.get('wasteTypes')?.invalid && collectForm.get('wasteTypes')?.touched">
-      Sélectionnez au moins un type de déchet.
-    </small>
-  </div>
+<div class="form-container">
+  <h2>{{ isEditMode ? 'Modifier la demande' : 'Nouvelle demande' }}</h2>
+  <form [formGroup]="collectForm" (ngSubmit)="onSubmit()">
+    <!-- Types de déchets (checkboxes) -->
+    <div class="form-group">
+      <label>Types de déchets</label>
+      <div class="checkbox-group">
+        <label>
+          <input type="checkbox" formControlName="plastique" value="plastique" />
+          Plastique
+        </label>
+        <label>
+          <input type="checkbox" formControlName="verre" value="verre" />
+          Verre
+        </label>
+        <label>
+          <input type="checkbox" formControlName="papier" value="papier" />
+          Papier
+        </label>
+        <label>
+          <input type="checkbox" formControlName="metal" value="metal" />
+          Métal
+        </label>
+      </div>
+      <small *ngIf="collectForm.get('wasteTypes')?.invalid && collectForm.get('wasteTypes')?.touched">
+        Sélectionnez au moins un type de déchet.
+      </small>
+    </div>
 
-  <div class="form-group">
-    <label>Poids estimé (en grammes)</label>
-    <input type="number" formControlName="estimatedWeight" />
-    <small *ngIf="collectForm.get('estimatedWeight')?.invalid && collectForm.get('estimatedWeight')?.touched">
-      Le poids doit être d'au moins 1000g.
-    </small>
-  </div>
+    <!-- Poids estimé -->
+    <div class="form-group">
+      <label>Poids estimé (en grammes)</label>
+      <input type="number" formControlName="estimatedWeight" />
+      <small *ngIf="collectForm.get('estimatedWeight')?.invalid && collectForm.get('estimatedWeight')?.touched">
+        Le poids doit être d'au moins 1000g.
+      </small>
+    </div>
 
-  <div>
-    <label for="address">Adresse de collecte</label>
-    <input type="text" id="address" formControlName="address">
-  </div>
+    <!-- Adresse de collecte -->
+    <div class="form-group">
+      <label for="address">Adresse de collecte</label>
+      <input type="text" id="address" formControlName="address" />
+    </div>
 
-  <div class="input-group">
-    <label for="city">Ville</label>
-    <input type="text" id="city" formControlName="city" required>
-  </div>
+    <!-- Ville -->
+    <div class="form-group">
+      <label for="city">Ville</label>
+      <input type="text" id="city" formControlName="city" required />
+    </div>
 
-  <div>
-    <label for="scheduledDate">Date de collecte</label>
-    <input type="date" id="scheduledDate" formControlName="scheduledDate">
-  </div>
+    <!-- Date de collecte -->
+    <div class="form-group">
+      <label for="scheduledDate">Date de collecte</label>
+      <input type="date" id="scheduledDate" formControlName="scheduledDate" />
+    </div>
 
-  <div>
-    <label for="timeSlot">Créneau horaire</label>
-    <input type="text" id="timeSlot" formControlName="timeSlot">
-  </div>
+    <!-- Créneau horaire -->
+    <div class="form-group">
+      <label for="timeSlot">Créneau horaire</label>
+      <input type="text" id="timeSlot" formControlName="timeSlot" />
+    </div>
 
-  <div>
-    <label for="notes">Notes supplémentaires</label>
-    <textarea id="notes" formControlName="notes"></textarea>
-  </div>
+    <!-- Notes supplémentaires -->
+    <div class="form-group">
+      <label for="notes">Notes supplémentaires</label>
+      <textarea id="notes" formControlName="notes"></textarea>
+    </div>
 
-  <div *ngIf="errorMessage" class="error-message">
-    {{ errorMessage }}
-  </div>
+    <!-- Message d'erreur -->
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
 
-  <button type="submit">
-    {{ isEditMode ? 'Mettre à jour' : 'Soumettre' }}
-  </button></form>
+    <!-- Bouton de soumission -->
+    <button type="submit">
+      {{ isEditMode ? 'Mettre à jour' : 'Soumettre' }}
+    </button>
+  </form>
+</div>

@@ -1,4 +1,5 @@
-<div *ngFor="let request of requests">
+<h2>Demandes en attente</h2>
+<div *ngFor="let request of pendingRequests">
   <p>Type de déchet: {{ request.wasteTypes }}</p>
   <p>Poids estimé: {{ request.estimatedWeight }}g</p>
   <p>Adresse: {{ request.address }}</p>
@@ -7,4 +8,14 @@
   <p>Statut: {{ request.status }}</p>
   <button (click)="acceptRequest(request.id)">Accepter</button>
   <button (click)="rejectRequest(request.id)">Rejeter</button>
+</div>
+
+<h2>Demandes acceptées</h2>
+<div *ngFor="let request of acceptedRequests">
+  <p>Type de déchet: {{ request.wasteTypes }}</p>
+  <p>Poids estimé: {{ request.estimatedWeight }}g</p>
+  <p>Adresse: {{ request.address }}</p>
+  <p>City: {{ request.city }}</p>
+  <p>Date: {{ request.scheduledDate | date }}</p>
+  <p>Statut: {{ request.status }}</p>
 </div>

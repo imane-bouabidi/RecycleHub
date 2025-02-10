@@ -1,3 +1,10 @@
-<div>
-  <h3>Vos points : {{ points?.totalPoints || 0 }}</h3>
+<div class="points-container">
+  <div *ngIf="points; else noPoints">
+    <p class="points-value">Points : {{ points.totalPoints }}</p>
+    <p class="last-updated">Dernière mise à jour : {{ points.lastUpdated | date:'dd/MM/yyyy HH:mm' }}</p>
+  </div>
+
+  <ng-template #noPoints>
+    <p class="no-points-message">Aucun point enregistré.</p>
+  </ng-template>
 </div>

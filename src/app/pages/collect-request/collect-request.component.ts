@@ -1,4 +1,3 @@
-// src/app/pages/collect-request/collect-request.component.ts
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import { CollectRequest } from '../../models/collect-request.model';
@@ -30,7 +29,10 @@ export class CollectRequestComponent {
     private authService: AuthService
   ) {
     this.collectForm = this.fb.group({
-      wasteTypes: [[], Validators.required],
+      plastique: [false],
+      verre: [false],
+      papier: [false],
+      metal: [false],
       estimatedWeight: ['', [Validators.required, Validators.min(1000)]],
       address: ['', Validators.required],
       city: ['', Validators.required],
@@ -47,6 +49,11 @@ export class CollectRequestComponent {
         this.errorMessage = 'Vous devez être connecté pour soumettre une demande.';
         return;
       }
+      const selectedWasteTypes = [];
+      if (this.collectForm.value.plastique) selectedWasteTypes.push('plastique');
+      if (this.collectForm.value.verre) selectedWasteTypes.push('verre');
+      if (this.collectForm.value.papier) selectedWasteTypes.push('papier');
+      if (this.collectForm.value.metal) selectedWasteTypes.push('metal');
 
       const requestId = this.route.snapshot.paramMap.get('id') || this.generateId();
 

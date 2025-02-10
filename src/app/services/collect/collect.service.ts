@@ -15,6 +15,10 @@ export class CollectService {
     return this.getRequests().filter(req => req.userId === userId);
   }
 
+  getRequestsByCity(city: string): CollectRequest[] {
+    return this.getRequests().filter(req => req.city === city);
+  }
+
   getRequestById(id: string): CollectRequest | undefined {
     return this.getRequests().find(r => r.id === id);
   }

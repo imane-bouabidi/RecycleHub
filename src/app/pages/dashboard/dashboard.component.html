@@ -1,17 +1,24 @@
 <div class="dashboard-container">
   <div *ngIf="user$ | async as user">
-    <!-- dashboard.component.html -->
     <div *ngIf="!isCollector">
-      <h2>Your Collection Requests</h2>
+      <h2>Vos demandes de collecte</h2>
+        <div class="add-button">
+          <button
+            class="btn btn-edit"
+            (click)="addRequest()"
+          >
+            Ajouter
+          </button>
+        </div>
       <div *ngIf="userRequests.length > 0; else noRequests">
         <table class="requests-table">
           <thead>
           <tr>
             <th>Types</th>
-            <th>Weight</th>
-            <th>Location</th>
+            <th>Poids</th>
+            <th>Adresse</th>
             <th>Date</th>
-            <th>Status</th>
+            <th>Statut</th>
             <th>Actions</th>
           </tr>
           </thead>
@@ -22,9 +29,9 @@
             <td>{{ request.address }}, {{ request.city }}</td>
             <td>{{ request.scheduledDate | date }}</td>
             <td>
-            <span class="status" [attr.status]="request.status">
-              {{ request.status }}
-            </span>
+                <span class="status" [attr.status]="request.status">
+                  {{ request.status }}
+                </span>
             </td>
             <td>
               <div class="button-group">
@@ -33,14 +40,14 @@
                   class="btn btn-edit"
                   (click)="editRequest(request.id)"
                 >
-                  Edit
+                  Modifier
                 </button>
                 <button
                   *ngIf="request.status === 'en attente'"
                   class="btn btn-delete"
                   (click)="deleteRequest(request.id)"
                 >
-                  Delete
+                  Supprimer
                 </button>
               </div>
             </td>
@@ -51,22 +58,23 @@
     </div>
 
     <div *ngIf="isCollector">
-      <h2>Available Requests</h2>
-      <div *ngIf="userRequests.length > 0; else noRequests">
+      <app-points></app-points>
+      <h2>Demandes disponibles</h2>
+      <div *ngIf="availableRequests.length > 0; else noRequests">
         <table class="requests-table">
           <thead>
           <tr>
             <th>Types</th>
-            <th>Weight</th>
-            <th>Location</th>
+            <th>Poids</th>
+            <th>Adresse</th>
             <th>Date</th>
-            <th>Status</th>
+            <th>Statut</th>
             <th>Actions</th>
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let request of requests">
-            <td>{{ (request.wasteTypes|| []).join(', ') }}</td>
+          <tr *ngFor="let request of availableRequests">
+            <td>{{ (request.wasteTypes || []).join(', ') }}</td>
             <td>{{ request.estimatedWeight }}g</td>
             <td>{{ request.address }}, {{ request.city }}</td>
             <td>{{ request.scheduledDate | date }}</td>
@@ -78,10 +86,10 @@
             <td>
               <div class="button-group">
                 <button class="btn btn-accept" (click)="acceptRequest(request.id)">
-                  Accept
+                  Accepter
                 </button>
                 <button class="btn btn-reject" (click)="rejectRequest(request.id)">
-                  Reject
+                  Rejeter
                 </button>
               </div>
             </td>
@@ -89,16 +97,40 @@
           </tbody>
         </table>
       </div>
+
+      <h2>Demandes acceptées</h2>
+      <div *ngIf="acceptedRequests.length > 0; else noRequests">
+        <table class="requests-table">
+          <thead>
+          <tr>
+            <th>Types</th>
+            <th>Poids</th>
+            <th>Adresse</th>
+            <th>Date</th>
+            <th>Statut</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let request of acceptedRequests">
+            <td>{{ (request.wasteTypes || []).join(', ') }}</td>
+            <td>{{ request.estimatedWeight }}g</td>
+            <td>{{ request.address }}, {{ request.city }}</td>
+            <td>{{ request.scheduledDate | date }}</td>
+            <td>
+                <span class="status" [attr.status]="request.status">
+                  {{ request.status }}
+                </span>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
+
+    <ng-template #noRequests>
+      <div class="no-requests">
+        Aucune demande trouvée.
+      </div>
+    </ng-template>
   </div>
-
-  <ng-template #noRequests>
-    <div class="no-requests">
-      No requests found
-    </div>
-  </ng-template>
-
-<!--  <button class="btn btn-load">-->
-<!--    Refresh Requests-->
-<!--  </button>-->
 </div>

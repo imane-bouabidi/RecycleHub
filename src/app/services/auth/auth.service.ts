@@ -53,6 +53,7 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem(this.CURRENT_USER_KEY);
+
   }
 
   updateUserInStorage(updatedUser: User): void {

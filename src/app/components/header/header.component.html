@@ -1,14 +1,11 @@
 <nav class="custom-navbar">
   <div class="custom-navbar-container">
-<!--    <div class="custom-navbar-header">-->
       <a href="#" class="custom-navbar-logo">
         <img ngSrc="images/logo.png" width="100" height="100" alt="" priority>
       </a>
       <ul class="custom-navbar-nav">
-        <li><a href="#home" class="scroll">Home</a></li>
-        <li><a href="#about" class="scroll">About</a></li>
-        <li><a href="#portfolio" class="scroll">Portfolio</a></li>
-        <li><a href="#contact" class="scroll">Contact</a></li>
+        <li><a [routerLink]="['/profile']" class="scroll">Profil</a></li>
+        <li><a (click)="logout()" class="scroll">Logout</a></li>
       </ul>
   </div>
 </nav>
